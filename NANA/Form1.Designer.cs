@@ -129,8 +129,9 @@ namespace NANA {
 			this.Name = "NANAForm";
 			this.Padding = new System.Windows.Forms.Padding(0, 30, 0, 0);
 			this.Resizable = false;
-			this.Style = MetroFramework.MetroColorStyle.Green;
+			this.Style = MetroFramework.MetroColorStyle.Default;
 			this.Text = "NANA";
+			this.Theme = MetroFramework.MetroThemeStyle.Default;
 			this.ResumeLayout(false);
 
 		}

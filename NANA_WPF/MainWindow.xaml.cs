@@ -1,24 +1,35 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using ControlzEx.Theming;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using OpenQA.Selenium;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using OpenQA.Selenium.Chrome;
-using MahApps.Metro;
+using OpenQA.Selenium;
 
-namespace NANA {
-	public partial class NANAForm : MahApps.Metro {
+namespace NANA_WPF {
+	/// <summary>
+	/// MainWindow.xaml에 대한 상호 작용 논리
+	/// </summary>
+	public partial class MainWindow : MetroWindow {
+
 		protected ChromeDriverService DriverService = null;
 		protected ChromeOptions Options = null;
 
-		public NANAForm() {
+		public MainWindow() {
 			InitializeComponent();
 
-			Random rng = new Random();
-
-			var themes = MetroStyleManager.Styles.Themes.Keys;
-			MetroStyleManager.Default.Theme = themes.ElementAt(rng.Next(themes.Count));
-
-			var styles = MetroStyleManager.Styles.Styles.Keys;
-			MetroStyleManager.Default.Style = styles.ElementAt(rng.Next(styles.Count));
+			ThemeManager.Current.ChangeTheme(this, "Dark.Green");
 
 			DriverService = ChromeDriverService.CreateDefaultService();
 			DriverService.HideCommandPromptWindow = true;
@@ -27,14 +38,14 @@ namespace NANA {
 			Options.AddArgument("disable-gpu");
 		}
 
-		private void BtnLogin_Click(object sender, EventArgs e) {
+		private void Btn_Login_Click(object sender, RoutedEventArgs e) {
 			string ID = TB_ID.Text;
 			string PW = TB_PW.Text;
 
 			var Driver = new ChromeDriver(DriverService, Options);
 			Driver.Navigate().GoToUrl("https://www.naver.com"); // 웹 사이트에 접속합니다.
 			Driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-				
+
 			var Element = Driver.FindElement(By.XPath("//*[@id='account']/div/a/i"));
 			Element.Click();
 
