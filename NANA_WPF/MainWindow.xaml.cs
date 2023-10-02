@@ -21,16 +21,16 @@ namespace NANA_WPF {
 	/// MainWindow.xaml에 대한 상호 작용 논리
 	/// </summary>
 	public partial class MainWindow : MetroWindow {
-		Nana nanaInstance = null;
+		Nana nanaBot = null;
 
 		public MainWindow() {
 			InitializeComponent();
 
 			ThemeManager.Current.ChangeTheme(this, "Dark.Green");
 
-			nanaInstance = new Nana();
-			if (nanaInstance != null) {
-				nanaInstance.Setup();
+			nanaBot = new Nana();
+			if (nanaBot != null) {
+				nanaBot.Setup();
 			}
 		}
 
@@ -38,8 +38,10 @@ namespace NANA_WPF {
 			string ID = TB_ID.Text;
 			string PW = TB_PW.Text;
 			
-			if (nanaInstance != null) {
-				nanaInstance.NaverLogin(ID, PW);
+			if (nanaBot != null) {
+				nanaBot.NaverLogin(ID, PW);
+				nanaBot.GotoBlogSectionPage();
+				nanaBot.FindNeighborhoodsList();
 			}
 		}
 	}
