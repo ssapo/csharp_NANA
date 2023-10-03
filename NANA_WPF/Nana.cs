@@ -42,13 +42,14 @@ namespace NANA_WPF {
 		}
 
 		public void FindNeighborhoodsList() {
-			var Elements = Driver.FindElements(By.ClassName("title_post"));
+			var Elements = Driver.FindElements(By.ClassName("info_post"));
 			if (Elements == null || Elements.Count() <= 0) {
 				return;
 			}
 
 			foreach (var Element in Elements) {
-				Console.WriteLine(Element.Text);
+				var title = Element.FindElement(By.ClassName("title_post"));
+				Console.WriteLine(title.Text);
 			}
 		}
 
